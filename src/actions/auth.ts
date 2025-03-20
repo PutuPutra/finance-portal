@@ -11,14 +11,8 @@ export async function login(formData: FormData) {
   }
 
   try {
-    // In a real application, you would validate these credentials against your API
-    // For this example, we'll use the provided credentials
     if (username === "user" && password === "password") {
-      // Set a cookie to maintain the session
-      (
-        await // Set a cookie to maintain the session
-        cookies()
-      ).set("auth_token", "authenticated", {
+      (await cookies()).set("auth_token", "authenticated", {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         maxAge: 60 * 60 * 24, // 1 day
