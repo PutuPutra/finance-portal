@@ -24,10 +24,6 @@ A responsive finance portal application with authentication, dashboard, and tran
    - **Username:** user
    - **Password:** password
 
-## Contact Developer
-
-For any inquiries, please email: [putupersada@gmail.com](mailto:putupersada@gmail.com)
-
 ## Project Structure
 
 - **src/app/layout.tsx:** Defines the root layout of the application.
@@ -45,3 +41,7 @@ For any inquiries, please email: [putupersada@gmail.com](mailto:putupersada@gmai
 - **Dashboard:** Authenticated users can access the dashboard to view and manage transactions.
 - **Transaction Management:** Users can view, filter, and export transaction data.
 - **Responsive Design:** The application is designed to be responsive and works well on both desktop and mobile devices.
+
+## Contact Developer
+
+For any inquiries, please email: [putupersada@gmail.com](mailto:putupersada@gmail.com)
