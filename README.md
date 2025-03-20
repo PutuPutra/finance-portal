@@ -10,8 +10,6 @@ A responsive finance portal application with authentication, dashboard, and tran
    git clone https://github.com/PutuPutra/finance-portal.git
    ```
 
-````
-
 2. **Install dependencies and run the development server**
 
    ```shell
@@ -49,6 +47,3 @@ For any inquiries, please email: [putupersada@gmail.com](mailto:putupersada@gmai
 - **Responsive Design:** The application is designed to be responsive and works well on both desktop and mobile devices.
 
 ```
-
-
-````
