@@ -24,6 +24,10 @@ A responsive finance portal application with authentication, dashboard, and tran
    - **Username:** user
    - **Password:** password
 
+## Demo
+
+You can view a live demo [here](https://finance-portal-persada.vercel.app/).
+
 ## Project Structure
 
 - **src/app/layout.tsx:** Defines the root layout of the application.
