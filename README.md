@@ -45,5 +45,3 @@ For any inquiries, please email: [putupersada@gmail.com](mailto:putupersada@gmai
 - **Dashboard:** Authenticated users can access the dashboard to view and manage transactions.
 - **Transaction Management:** Users can view, filter, and export transaction data.
 - **Responsive Design:** The application is designed to be responsive and works well on both desktop and mobile devices.
-
-```
