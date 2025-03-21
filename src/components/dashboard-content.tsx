@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useState } from "react";
@@ -19,7 +18,7 @@ interface DashboardContentProps {
 
 export default function DashboardContent({ initialTransactions }: DashboardContentProps) {
   const router = useRouter();
-  const [transactions, setTransactions] = useState<Transaction[]>(initialTransactions);
+  const [transactions] = useState<Transaction[]>(initialTransactions);
   const [filteredTransactions, setFilteredTransactions] =
     useState<Transaction[]>(initialTransactions);
 
