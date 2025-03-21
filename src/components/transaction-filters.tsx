@@ -26,19 +26,21 @@ export default function TransactionFilters({
 }: TransactionFiltersProps) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [type, setType] = useState("");
-  const [category, setCategory] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("all");
+  const [category, setCategory] = useState("all");
   const [minAmount, setMinAmount] = useState("");
   const [maxAmount, setMaxAmount] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [status, setStatus] = useState("all");
 
-  // Get unique categories and types for filter options
+  // Get unique categories, payment methods, and statuses for filter options
   const categories = [...new Set(transactions.map((t) => t.category))].sort();
-  const types = [...new Set(transactions.map((t) => t.type))].sort();
+  const paymentMethods = [...new Set(transactions.map((t) => t.paymentMethod))].sort();
+  const statuses = [...new Set(transactions.map((t) => t.status))].sort();
 
   useEffect(() => {
     applyFilters();
-  }, [startDate, endDate, type, category, minAmount, maxAmount, searchTerm]);
+  }, [startDate, endDate, paymentMethod, category, minAmount, maxAmount, searchTerm, status]);
 
   function applyFilters() {
     let filtered = [...transactions];
@@ -53,12 +55,16 @@ export default function TransactionFilters({
       filtered = filtered.filter((t) => new Date(t.date) <= endDateObj);
     }
 
-    if (type) {
-      filtered = filtered.filter((t) => t.type === type);
+    if (paymentMethod && paymentMethod !== "all") {
+      filtered = filtered.filter((t) => t.paymentMethod === paymentMethod);
     }
 
-    if (category) {
+    if (category && category !== "all") {
       filtered = filtered.filter((t) => t.category === category);
+    }
+
+    if (status && status !== "all") {
+      filtered = filtered.filter((t) => t.status === status);
     }
 
     if (minAmount) {
@@ -72,7 +78,10 @@ export default function TransactionFilters({
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
       filtered = filtered.filter(
-        (t) => t.description.toLowerCase().includes(term) || t.id.toLowerCase().includes(term)
+        (t) =>
+          t.productName.toLowerCase().includes(term) ||
+          t.id.toLowerCase().includes(term) ||
+          t.deviceId.toLowerCase().includes(term)
       );
     }
 
@@ -82,8 +91,9 @@ export default function TransactionFilters({
   function resetFilters() {
     setStartDate("");
     setEndDate("");
-    setType("");
-    setCategory("");
+    setPaymentMethod("all");
+    setCategory("all");
+    setStatus("all");
     setMinAmount("");
     setMaxAmount("");
     setSearchTerm("");
@@ -94,7 +104,7 @@ export default function TransactionFilters({
       <div className="relative">
         <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
         <Input
-          placeholder="Search transactions..."
+          placeholder="Search by product name, ID, or device..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="pl-10"
@@ -133,16 +143,16 @@ export default function TransactionFilters({
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="type">Transaction Type</Label>
-          <Select value={type} onValueChange={setType}>
-            <SelectTrigger id="type">
-              <SelectValue placeholder="All types" />
+          <Label htmlFor="payment-method">Payment Method</Label>
+          <Select value={paymentMethod} onValueChange={setPaymentMethod}>
+            <SelectTrigger id="payment-method">
+              <SelectValue placeholder="All payment methods" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All types</SelectItem>
-              {types.map((t) => (
-                <SelectItem key={t} value={t}>
-                  {t}
+              <SelectItem value="all">All payment methods</SelectItem>
+              {paymentMethods.map((method) => (
+                <SelectItem key={method} value={method}>
+                  {method}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -150,7 +160,7 @@ export default function TransactionFilters({
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="category">Category</Label>
+          <Label htmlFor="category">Product Category</Label>
           <Select value={category} onValueChange={setCategory}>
             <SelectTrigger id="category">
               <SelectValue placeholder="All categories" />
@@ -160,6 +170,23 @@ export default function TransactionFilters({
               {categories.map((c) => (
                 <SelectItem key={c} value={c}>
                   {c}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="status">Transaction Status</Label>
+          <Select value={status} onValueChange={setStatus}>
+            <SelectTrigger id="status">
+              <SelectValue placeholder="All statuses" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All statuses</SelectItem>
+              {statuses.map((s) => (
+                <SelectItem key={s} value={s}>
+                  {s}
                 </SelectItem>
               ))}
             </SelectContent>
